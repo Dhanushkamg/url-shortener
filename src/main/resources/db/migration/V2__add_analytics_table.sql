@@ -1,0 +1,8 @@
+CREATE TABLE click_events (
+    id BIGSERIAL PRIMARY KEY,
+    url_id BIGINT NOT NULL,
+    clicked_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    referer VARCHAR(2048),
+    user_agent VARCHAR(2048),
+    CONSTRAINT fk_url FOREIGN KEY (url_id) REFERENCES urls (id) ON DELETE CASCADE
+);
