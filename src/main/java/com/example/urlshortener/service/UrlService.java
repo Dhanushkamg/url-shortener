@@ -58,4 +58,8 @@ public class UrlService {
         }
         return optionalUrl;
     }
+
+    public java.util.List<Url> getAllUrls() {
+        return urlRepository.findAll();
+    }
 }
