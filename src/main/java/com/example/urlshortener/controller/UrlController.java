@@ -60,4 +60,25 @@ public class UrlController {
                 .<Void>build())
         .orElse(ResponseEntity.<Void>notFound().build());
     }
+
+    @GetMapping("/api/urls")
+    public ResponseEntity<java.util.List<UrlResponse>> getAllUrls(HttpServletRequest httpRequest) {
+        String baseUrl = ServletUriComponentsBuilder.fromRequestUri(httpRequest)
+                .replacePath(null)
+                .build()
+                .toUriString();
+
+        java.util.List<UrlResponse> responses = urlService.getAllUrls().stream()
+                .map(url -> new UrlResponse(
+                        url.getShortCode(),
+                        url.getOriginalUrl(),
+                        baseUrl + "/" + url.getShortCode(),
+                        url.getCreatedAt(),
+                        url.getExpiresAt(),
+                        url.getClickCount()
+                ))
+                .toList();
+
+        return ResponseEntity.ok(responses);
+    }
 }
