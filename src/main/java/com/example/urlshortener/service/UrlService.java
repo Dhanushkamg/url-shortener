@@ -63,3 +63,4 @@ public class UrlService {
         return urlRepository.findAll();
     }
 }
+// Service layer handles core business logic and data access
